@@ -1,12 +1,7 @@
 package com.spring_boot_backend.product.domain;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.AccessLevel;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -39,8 +34,8 @@ public class Product implements Serializable {
     private Set<String> technologiesStack = new HashSet<>();
 
     //No id constructor for inserting in the database where the id is auto generated
-    public Product (String productName, String description,
-                    Set<String> targetMarketStack, Set<String> technologiesStack){
+    public Product (@NonNull String productName, @NonNull String description,
+                    @NonNull Set<String> targetMarketStack, @NonNull Set<String> technologiesStack){
         this.productName = productName;
         this.description = description;
         this.targetMarketStack = targetMarketStack;
