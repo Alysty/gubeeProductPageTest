@@ -14,8 +14,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-
+//Spring annotation for mongo collections
 @Document
+//Lombok annotations auto generating basic code
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
@@ -23,6 +24,8 @@ import java.util.Set;
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
+
+    // Id must be null when inserting in database for auto generation of the ID
     @EqualsAndHashCode.Include
     @Id
     private String id = null;
