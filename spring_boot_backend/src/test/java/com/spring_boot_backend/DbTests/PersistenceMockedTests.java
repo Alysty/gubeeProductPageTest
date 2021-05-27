@@ -13,7 +13,7 @@ import java.util.Set;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class InstantiationDBTest {
+public class PersistenceMockedTests {
 
     @Autowired
     private ProductRepositoryOut productRepositoryOut;
