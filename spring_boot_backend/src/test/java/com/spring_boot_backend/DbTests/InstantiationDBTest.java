@@ -3,8 +3,7 @@ package com.spring_boot_backend.DbTests;
 import com.spring_boot_backend.product.adapter.in.persistence.ProductRepositoryIn;
 import com.spring_boot_backend.product.adapter.out.persistence.ProductRepositoryOut;
 import com.spring_boot_backend.product.domain.Product;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,14 +12,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InstantiationDBTest {
 
     @Autowired
     private ProductRepositoryOut productRepositoryOut;
     @Autowired
     private ProductRepositoryIn productRepositoryIn;
+
+
     @Test
-    public void TestDB(){
+    @Order(1)
+    void TestInserting3ProductsIntoTheDataBase(){
 
         productRepositoryOut.deleteAll();
 
@@ -58,8 +61,10 @@ public class InstantiationDBTest {
 
         productRepositoryOut.saveAll(Arrays.asList(product1,product2,product3));
 
-        //System.out.println("--------------TEST--------------\n" + productRepositoryIn.findAll().toArray()[0] + "\n--------------TEST--------------");
+    }
+    @Test
+    @Order(2)
+    void testGettingAllProductsFromDatabase(){
         Assertions.assertTrue(productRepositoryIn.findAll().toArray().length == 3);
-
     }
 }
