@@ -4,10 +4,12 @@ import com.spring_boot_backend.product.adapter.in.persistence.ProductRepositoryI
 import com.spring_boot_backend.product.application.ports.out.QueryForProductsUseCase;
 import com.spring_boot_backend.product.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class QueryForProductsService implements QueryForProductsUseCase {
 
     @Autowired

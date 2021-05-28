@@ -1,5 +1,6 @@
 package com.spring_boot_backend.product.application.ports.in;
 
+
 import java.util.Set;
 
 public interface CreateProductUseCase {
