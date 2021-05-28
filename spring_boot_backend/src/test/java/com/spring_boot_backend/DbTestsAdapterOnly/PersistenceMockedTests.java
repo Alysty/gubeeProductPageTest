@@ -1,4 +1,4 @@
-package com.spring_boot_backend.DbTests;
+package com.spring_boot_backend.DbTestsAdapterOnly;
 
 import com.spring_boot_backend.product.adapter.in.persistence.ProductRepositoryIn;
 import com.spring_boot_backend.product.adapter.out.persistence.ProductRepositoryOut;

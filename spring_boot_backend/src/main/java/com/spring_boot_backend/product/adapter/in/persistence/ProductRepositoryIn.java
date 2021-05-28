@@ -17,14 +17,14 @@ public interface ProductRepositoryIn extends MongoRepository<Product, String> {
 
     //Return all the products that match all the queries below
     List<Product> findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
-            String name, Set<String> TargetMarketStack, Set<String> TechnologiesStack);
+            String name, Set<String> targetMarketStack, Set<String> technologiesStack);
 
     //Return all the products without any markets queries
     List<Product> findAllByProductNameLikeAndTargetMarketStackIn(
-            String name, Set<String> TargetMarketStack);
+            String name, Set<String> targetMarketStack);
 
     //Return all the products without any technologies queries
     List<Product> findAllByProductNameLikeAndTechnologiesStackIn(
-            String name, Set<String> TechnologiesStack);
+            String name, Set<String> technologiesStack);
 
 }
