@@ -82,15 +82,23 @@ public class PersistenceMockedTests {
         List<Product> products = this.productRepositoryIn.
                 findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
                         "Cd seller manager", this.listMarkets2, this.listTechnologies2);
-        System.out.println(products.toString());
         Assertions.assertTrue(products.toArray().length == 1);
     }
     @Test
     @Order(5)
-    void testQueryingWithEmptyParametersWhereYouGetTheFullList(){
-        List<Product> products = this.productRepositoryIn.
-                findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
-                        "", this.listMarkets3, this.listTechnologies3);
-        Assertions.assertTrue(products.toArray().length == 3);
+    void testQueryingWithoutMarketParameters(){
+        List<Product> products =this.productRepositoryIn.
+                findAllByProductNameLikeAndTargetMarketStackIn("", this.listMarkets2);
+
+        Assertions.assertTrue(products.toArray().length == 2);
     }
+    @Test
+    @Order(6)
+    void testQueryingWithoutTechnologiesParameters(){
+        List<Product> products = this.productRepositoryIn.
+                findAllByProductNameLikeAndTechnologiesStackIn("",this.listTechnologies2);
+
+        Assertions.assertTrue(products.toArray().length == 2);
+    }
+
 }

@@ -19,6 +19,12 @@ public interface ProductRepositoryIn extends MongoRepository<Product, String> {
     List<Product> findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
             String name, Set<String> TargetMarketStack, Set<String> TechnologiesStack);
 
-    //This query is for testing query behavior
-    List<Product> findAllByTechnologiesStackIn(Set<String> TechnologiesStack);
+    //Return all the products without any markets queries
+    List<Product> findAllByProductNameLikeAndTargetMarketStackIn(
+            String name, Set<String> TargetMarketStack);
+
+    //Return all the products without any technologies queries
+    List<Product> findAllByProductNameLikeAndTechnologiesStackIn(
+            String name, Set<String> TechnologiesStack);
+
 }
