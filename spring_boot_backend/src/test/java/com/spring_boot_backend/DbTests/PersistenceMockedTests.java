@@ -7,9 +7,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -20,51 +18,79 @@ public class PersistenceMockedTests {
     @Autowired
     private ProductRepositoryIn productRepositoryIn;
 
+    // List of markets and technologies created as a attribute for use in multiple methods
+    private Set<String> listMarkets1 = new HashSet<>();
+    private Set<String> listMarkets2 = new HashSet<>();
+    private Set<String> listMarkets3 = new HashSet<>();
 
+    private Set<String> listTechnologies1 = new HashSet<>();
+    private Set<String> listTechnologies2 = new HashSet<>();
+    private Set<String> listTechnologies3 = new HashSet<>();
+
+    public PersistenceMockedTests(){
+        this.listMarkets1.add("Music listener market");
+        this.listMarkets1.add("Retailers");
+        this.listMarkets2.add("Retailers");
+
+        this.listTechnologies1.add("Java");
+        this.listTechnologies1.add("Angular");
+        this.listTechnologies2.add("Java");
+    }
     @Test
     @Order(1)
     void TestInserting3ProductsIntoTheDataBase(){
 
-        productRepositoryOut.deleteAll();
+        this.productRepositoryOut.deleteAll();
 
-        Set<String> listMarkets1 = new HashSet<>();
-        listMarkets1.add("Music listener market");
-        listMarkets1.add("Retailers");
 
-        Set<String> listMarkets2 = new HashSet<>();
-        listMarkets2.add("Music listener market");
-        listMarkets2.add("Retailers");
 
-        Set<String> listMarkets3 = new HashSet<>();
-
-        Set<String> listTechnologies1 = new HashSet<>();
-        listTechnologies1.add("Java");
-        listTechnologies1.add("Angular");
-
-        Set<String> listTechnologies2 = new HashSet<>();
-        listTechnologies2.add("Java");
-
-        Set<String> listTechnologies3 = new HashSet<>();
         Product product1 = new Product("Cd seller manager",
                 "A software that manages a cd seller's store",
-                listMarkets1,
-                listTechnologies1);
+                this.listMarkets1,
+                this.listTechnologies1);
         Product product2 = new Product("Library manager",
                 "A software that manages a library",
-                listMarkets2,
-                listTechnologies2);
+                this.listMarkets2,
+                this.listTechnologies2);
         Product product3 = new Product("Test no markets or technologies",
                 "this is a test",
-                listMarkets3,
-                listTechnologies3);
+                this.listMarkets3,
+                this.listTechnologies3);
 
 
-        productRepositoryOut.saveAll(Arrays.asList(product1,product2,product3));
+        this.productRepositoryOut.saveAll(Arrays.asList(product1,product2,product3));
 
     }
+
+    //Testing getting all products stored in the database
     @Test
     @Order(2)
     void testGettingAllProductsFromDatabase(){
-        Assertions.assertTrue(productRepositoryIn.findAll().toArray().length == 3);
+        Assertions.assertTrue(this.productRepositoryIn.findAll().toArray().length == 3);
+    }
+    @Test
+    @Order(3)
+    void testQueryingWithAllWithoutNameWhereYouGetTwoReturns(){
+        List<Product> products = this.productRepositoryIn.
+                findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
+                        "", this.listMarkets2, this.listTechnologies2);
+        Assertions.assertTrue(products.toArray().length == 2);
+    }
+    @Test
+    @Order(4)
+    void testQueryingWithAllParametersUsedWhereYouGetASingleReturn(){
+        List<Product> products = this.productRepositoryIn.
+                findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
+                        "Cd seller manager", this.listMarkets2, this.listTechnologies2);
+        System.out.println(products.toString());
+        Assertions.assertTrue(products.toArray().length == 1);
+    }
+    @Test
+    @Order(5)
+    void testQueryingWithEmptyParametersWhereYouGetTheFullList(){
+        List<Product> products = this.productRepositoryIn.
+                findAllByProductNameLikeAndTargetMarketStackInAndTechnologiesStackIn(
+                        "", this.listMarkets3, this.listTechnologies3);
+        Assertions.assertTrue(products.toArray().length == 3);
     }
 }
