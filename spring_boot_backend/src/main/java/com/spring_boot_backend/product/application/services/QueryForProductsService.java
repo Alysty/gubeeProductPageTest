@@ -26,12 +26,17 @@ public class QueryForProductsService implements QueryForProductsUseCase {
     }
 
     @Override
-    public List<Product> searchForProductsWithoutUsingMarkets(String name, Set<String> targetMarketStack) {
+    public List<Product> searchForProductsWithoutUsingTechnologies(String name, Set<String> targetMarketStack) {
         return productRepositoryIn.findAllByProductNameLikeAndTargetMarketStackIn(name, targetMarketStack);
     }
 
     @Override
-    public List<Product> searchForProductsWithoutUsingTechnologies(String name, Set<String> technologiesStack) {
+    public List<Product> searchForProductsWithoutUsingMarkets(String name, Set<String> technologiesStack) {
         return productRepositoryIn.findAllByProductNameLikeAndTechnologiesStackIn(name, technologiesStack);
+    }
+
+    @Override
+    public List<Product> searchForProductsWithNameOnly(String name) {
+        return productRepositoryIn.findAllByProductNameLike(name);
     }
 }

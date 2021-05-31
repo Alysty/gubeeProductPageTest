@@ -52,6 +52,10 @@ public class PersistenceMockedTests {
                 "A software that manages a library",
                 this.listMarkets2,
                 this.listTechnologies2);
+        Product product4 = new Product("Cd seller manager 2",
+                "A second software that manages a cd seller's store",
+                this.listMarkets1,
+                this.listTechnologies1);
         Product product3 = new Product("Test no markets or technologies",
                 "this is a test",
                 this.listMarkets3,

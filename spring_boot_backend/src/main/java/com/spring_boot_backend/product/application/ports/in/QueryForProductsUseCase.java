@@ -9,4 +9,5 @@ public interface QueryForProductsUseCase {
     public List<Product> searchForProductsUsingAllParameters(String name, Set<String> targetMarketStack, Set<String> technologiesStack);
     public List<Product> searchForProductsWithoutUsingMarkets(String name, Set<String> targetMarketStack);
     public List<Product> searchForProductsWithoutUsingTechnologies(String name, Set<String> technologiesStack);
+    public List<Product> searchForProductsWithNameOnly(String name);
 }
