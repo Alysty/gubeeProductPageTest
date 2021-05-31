@@ -1,8 +1,6 @@
 package com.spring_boot_backend.ServicesTests;
 
-import com.spring_boot_backend.product.adapter.out.persistence.ProductRepositoryOut;
-import com.spring_boot_backend.product.application.ports.in.CreateProductUseCase;
-import com.spring_boot_backend.product.application.services.CreateProductService;
+import com.spring_boot_backend.product.application.ports.out.CreateProductUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

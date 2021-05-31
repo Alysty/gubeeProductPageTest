@@ -1,7 +1,7 @@
 package com.spring_boot_backend.product.application.services;
 
 import com.spring_boot_backend.product.adapter.out.persistence.ProductRepositoryOut;
-import com.spring_boot_backend.product.application.ports.in.UpdateProductUseCase;
+import com.spring_boot_backend.product.application.ports.out.UpdateProductUseCase;
 import com.spring_boot_backend.product.domain.Product;
 import com.spring_boot_backend.shared.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.spring_boot_backend.product.application.ports.out;
+package com.spring_boot_backend.product.application.ports.in;
 
 import com.spring_boot_backend.product.domain.Product;
 

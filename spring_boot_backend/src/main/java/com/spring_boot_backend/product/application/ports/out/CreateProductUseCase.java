@@ -1,4 +1,4 @@
-package com.spring_boot_backend.product.application.ports.in;
+package com.spring_boot_backend.product.application.ports.out;
 
 
 import java.util.Set;
