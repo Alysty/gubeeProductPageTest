@@ -7,13 +7,19 @@ import com.spring_boot_backend.shared.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UpdateProductService implements UpdateProductUseCase {
+    private ProductRepositoryOut productRepositoryOut;
+
     @Autowired
-    ProductRepositoryOut productRepositoryOut;
+    public UpdateProductService (ProductRepositoryOut productRepositoryOut){
+        Objects.requireNonNull(productRepositoryOut);
+        this.productRepositoryOut = productRepositoryOut;
+    }
     @Override
     public Product updateProduct(String id, String productName, String description, Set<String> targetMarketStack, Set<String> technologiesStack) {
         Product updatedProduct = findById(id);
