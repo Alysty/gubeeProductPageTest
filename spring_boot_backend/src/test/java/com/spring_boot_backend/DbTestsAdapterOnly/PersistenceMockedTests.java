@@ -100,5 +100,13 @@ public class PersistenceMockedTests {
 
         Assertions.assertTrue(products.toArray().length == 2);
     }
+    @Test
+    @Order(7)
+    void testQueryingWithoutMarketAndTechnologiesParameters(){
+        List<Product> products = this.productRepositoryIn.
+                findAllByProductNameLike("");
+        Assertions.assertTrue(products.toArray().length == 3);
+    }
+
 
 }
