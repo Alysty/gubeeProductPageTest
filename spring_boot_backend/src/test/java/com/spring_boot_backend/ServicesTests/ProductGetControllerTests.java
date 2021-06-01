@@ -47,7 +47,7 @@ public class ProductGetControllerTests {
     }
 
     @Test
-    void testingAnything(){
+    void testGettingAllProductsWithControllersWithMockedData(){
         List<Product> products = new ArrayList<>();
 
         products.add(new Product("id", "Test Name", "description",this.listMarkets1, this.listTechnologies1));
