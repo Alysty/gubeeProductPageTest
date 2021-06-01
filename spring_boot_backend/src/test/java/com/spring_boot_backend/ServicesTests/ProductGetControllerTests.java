@@ -1,7 +1,5 @@
 package com.spring_boot_backend.ServicesTests;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring_boot_backend.product.application.services.QueryForProductsService;
 import com.spring_boot_backend.product.domain.Product;
