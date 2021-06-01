@@ -3,12 +3,9 @@ package com.spring_boot_backend.product.adapter.out.web;
 import com.spring_boot_backend.product.application.services.QueryForProductsService;
 import com.spring_boot_backend.product.domain.Product;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -26,4 +23,11 @@ public class ProductGetController {
         return ResponseEntity.ok().body(productList);
 
     }
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> findByNameOnly(@RequestParam(name = "name") String name){
+        System.out.println("GOT HERE");
+        List<Product> productList = queryForProductsService.searchForProductsWithNameOnly(name);
+        return ResponseEntity.ok().body(productList);
+    }
+
 }
