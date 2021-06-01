@@ -17,17 +17,39 @@ public class ProductGetController {
         this.queryForProductsService = queryForProductsService;
     }
 
+    // Mapping for getting all the possible searches for products in the database
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> findAll(){
-        List<Product> productList = queryForProductsService.searchForProductsWithNameOnly("");
+    public ResponseEntity<List<Product>> getRequestForAllSearches(@RequestParam(name = "name", required = false) String name,
+                                                 @RequestParam(name = "markets", required = false) String[] markets,
+                                                 @RequestParam(name = "technologies", required = false) String[] technologies)
+    {
+
+        if(name==null){
+            name = "";
+        }
+        if(name==""){
+            List<Product> productList = queryForProductsService.searchForProductsWithNameOnly("");
+            return ResponseEntity.ok().body(productList);
+        }
+        if(markets == null && technologies == null){
+            List<Product> productList = queryForProductsService.searchForProductsWithNameOnly(name);
+            return ResponseEntity.ok().body(productList);
+        }
+        if(markets == null){
+            List<Product> productList = queryForProductsService
+                    .searchForProductsWithoutUsingMarkets(name, new HashSet<>(Arrays.asList(technologies)));
+            return ResponseEntity.ok().body(productList);
+        }
+        if (technologies == null){
+            List<Product> productList = queryForProductsService
+                    .searchForProductsWithoutUsingTechnologies(name, new HashSet<>(Arrays.asList(markets)));
+            System.out.println(productList);
+            return ResponseEntity.ok().body(productList);
+        }
+        List<Product> productList = queryForProductsService
+                .searchForProductsUsingAllParameters(name, new HashSet<>(Arrays.asList(markets)), new HashSet<>(Arrays.asList(technologies)));
         return ResponseEntity.ok().body(productList);
 
-    }
-    @RequestMapping(path = "/search", method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> findByNameOnly(@RequestParam(name = "name") String name){
-        System.out.println("GOT HERE");
-        List<Product> productList = queryForProductsService.searchForProductsWithNameOnly(name);
-        return ResponseEntity.ok().body(productList);
     }
 
 }

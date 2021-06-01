@@ -1,12 +1,14 @@
 package com.spring_boot_backend.ServicesTests;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring_boot_backend.product.application.services.QueryForProductsService;
 import com.spring_boot_backend.product.domain.Product;
 import org.hamcrest.Matchers;
-import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,6 +38,7 @@ public class ProductGetControllerTests {
     private Set<String> listMarkets1 = new HashSet<>();
 
     private Set<String> listTechnologies1 = new HashSet<>();
+
 
     public ProductGetControllerTests(){
         this.listMarkets1.add("Music listener market");
@@ -67,7 +70,46 @@ public class ProductGetControllerTests {
 
         Mockito.when(queryForProductsService.searchForProductsWithNameOnly("Test Name")).thenReturn(products);
 
-        mockMvc.perform(get("/products/search?name=Test Name")).andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(1)))
+        mockMvc.perform(get("/products?name=Test Name")).andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(1)))
+                .andExpect(jsonPath("$[0].id", Matchers.equalTo("id")))
+                .andExpect(jsonPath("$[0].productName", Matchers.equalTo("Test Name")));
+    }
+    @Test
+    void testGettingProductsWithControllersAndWithMockedDataAndWithNameAndMarketAsParameterSearch() throws Exception {
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product("id", "Test Name", "description",this.listMarkets1, this.listTechnologies1));
+
+        Mockito.when(queryForProductsService.searchForProductsWithoutUsingTechnologies("Test Name", this.listMarkets1)).thenReturn(products);
+
+        mockMvc.perform(get("/products?name=Test Name&markets=Music listener market, Retailers"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(1)))
+                .andExpect(jsonPath("$[0].id", Matchers.equalTo("id")))
+                .andExpect(jsonPath("$[0].productName", Matchers.equalTo("Test Name")));
+    }
+    @Test
+    void testGettingProductsWithControllersAndWithMockedDataAndWithNameAndTechnologiesAsParameterSearch() throws Exception {
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product("id", "Test Name", "description",this.listMarkets1, this.listTechnologies1));
+
+        Mockito.when(queryForProductsService.searchForProductsWithoutUsingMarkets("Test Name", this.listTechnologies1)).thenReturn(products);
+
+        mockMvc.perform(get("/products?name=Test Name&technologies=Java, Angular"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(1)))
+                .andExpect(jsonPath("$[0].id", Matchers.equalTo("id")))
+                .andExpect(jsonPath("$[0].productName", Matchers.equalTo("Test Name")));
+    }
+    @Test
+    void testGettingProductsWithControllersAndWithMockedDataAndWithAllAsParameterSearch() throws Exception {
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product("id", "Test Name", "description",this.listMarkets1, this.listTechnologies1));
+
+        Mockito.when(queryForProductsService.searchForProductsUsingAllParameters("Test Name", this.listMarkets1, this.listTechnologies1)).thenReturn(products);
+
+        mockMvc.perform(get("/products?name=Test Name&technologies=Java, Angular&markets=Music listener market, Retailers"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(jsonPath("$[0].id", Matchers.equalTo("id")))
                 .andExpect(jsonPath("$[0].productName", Matchers.equalTo("Test Name")));
     }
