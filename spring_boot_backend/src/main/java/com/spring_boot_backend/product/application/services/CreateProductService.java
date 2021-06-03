@@ -1,28 +1,25 @@
 package com.spring_boot_backend.product.application.services;
 
-import com.spring_boot_backend.product.adapter.out.persistence.ProductRepositoryOut;
+import com.spring_boot_backend.product.application.ports.in.ProductRepository;
 import com.spring_boot_backend.product.application.ports.out.CreateProductUseCase;
 import com.spring_boot_backend.product.domain.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Set;
-
 @Service
+@RequiredArgsConstructor
 public class CreateProductService implements CreateProductUseCase {
 
 
-    private ProductRepositoryOut productRepositoryOut;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    public CreateProductService (ProductRepositoryOut productRepositoryOut){
-        Objects.requireNonNull(productRepositoryOut);
-        this.productRepositoryOut = productRepositoryOut;
-    }
+
     @Override
-    public void createProduct(String productName, String description, Set<String> targetMarketStack, Set<String> technologiesStack) {
-        Product product = new Product(productName, description, targetMarketStack, technologiesStack);
-        this.productRepositoryOut.insert(product);
+    public void createProduct(CreateProductRequest createProductRequest) {
+        Product product = new Product(createProductRequest.getProductName(),
+                createProductRequest.getDescription(),
+                createProductRequest.getTargetMarketStack(),
+                createProductRequest.getTechnologiesStack());
+        this.productRepository.save(product);
     }
 }
