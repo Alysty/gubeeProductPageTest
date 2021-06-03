@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListProductComponent } from './list-product.component';
+import {ListProductRoutingModule} from "./list-product-routing.module";
 
 
 
@@ -9,7 +10,8 @@ import { ListProductComponent } from './list-product.component';
     ListProductComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ListProductRoutingModule
   ]
 })
 export class ListProductModule { }
