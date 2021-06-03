@@ -1,7 +1,6 @@
 package com.spring_boot_backend.product.adapter.in.web;
 
 import com.spring_boot_backend.product.application.ports.out.CreateProductUseCase;
-import com.spring_boot_backend.product.application.services.CreateProductService;
 import com.spring_boot_backend.product.domain.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -16,7 +16,7 @@ public class ProductDeleteController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Void> insert(@RequestParam String id){
+    public ResponseEntity<Void> delete(@RequestParam String id){
         deleteProductUseCase.deleteProduct(id);
         return ResponseEntity.ok().build();
     }

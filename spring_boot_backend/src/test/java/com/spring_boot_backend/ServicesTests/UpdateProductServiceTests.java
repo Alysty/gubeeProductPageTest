@@ -8,7 +8,6 @@ import com.spring_boot_backend.product.domain.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +36,7 @@ public class UpdateProductServiceTests {
         updateProductUseCase = new UpdateProductService(productRepository);
     }
     @Test
-    public void shouldCreateAProductInDatabaseAndUpdateItCheckingIfTheProductWasACtuallyUpdated(){
+    public void shouldCreateAProductInDatabaseAndUpdateItCheckingIfTheProductWasActuallyUpdated(){
         //given
         String id;
         Product product = Product.builder()
@@ -70,16 +69,6 @@ public class UpdateProductServiceTests {
         );
 
         //then
-        productRepository.findAllByFiltering(
-                ProductRepository
-                        .ProductFilter
-                        .builder()
-                        .name("Test")
-                        .targetMarketStack(listMarkets2)
-                        .technologiesStack(listTechnologies2)
-                        .build()
-        ).forEach(product1 -> System.out.println(product1.toString()));
-
         Assertions.assertEquals(1,
                 productRepository.findAllByFiltering(
                         ProductRepository
