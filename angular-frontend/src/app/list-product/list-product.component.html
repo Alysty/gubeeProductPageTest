@@ -1,1 +1,20 @@
-<p>list-product works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Target Markets</th>
+    <th scope="col">Technologies</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of productList; index as i">
+    <th scope="row">{{i}}</th>
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.targetMarket.values()}}</td>
+    <td>{{product.technologies.values()}}</td>
+  </tr>
+  </tbody>
+</table>
