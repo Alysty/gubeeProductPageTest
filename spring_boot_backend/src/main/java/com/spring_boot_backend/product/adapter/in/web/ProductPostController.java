@@ -15,15 +15,15 @@ import java.util.Objects;
 @RequestMapping(value = "/products")
 public class ProductPostController {
 
-    CreateProductService createProductService;
-    public ProductPostController(CreateProductService createProductService){
-        Objects.requireNonNull(createProductService);
-        this.createProductService = createProductService;
+    CreateProductUseCase createProductUseCase;
+    public ProductPostController(CreateProductUseCase createProductUseCase){
+        Objects.requireNonNull(createProductUseCase);
+        this.createProductUseCase = createProductUseCase;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@RequestBody Product product){
-        createProductService.createProduct(CreateProductUseCase.CreateProductRequest.builder()
+        createProductUseCase.createProduct(CreateProductUseCase.CreateProductRequest.builder()
                 .productName(product.getProductName())
                 .description(product.getDescription())
                 .targetMarketStack(product.getTargetMarketStack())
