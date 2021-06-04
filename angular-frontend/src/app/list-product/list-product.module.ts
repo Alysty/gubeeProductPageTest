@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListProductComponent } from './list-product.component';
-import {ListProductRoutingModule} from "./list-product-routing.module";
+import { ListProductRoutingModule } from "./list-product-routing.module";
+import { HttpClientModule } from "@angular/common/http";
+import { ListProductService } from "./list-product.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -11,7 +14,10 @@ import {ListProductRoutingModule} from "./list-product-routing.module";
   ],
   imports: [
     CommonModule,
-    ListProductRoutingModule
-  ]
+    ListProductRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers:[ListProductService]
 })
 export class ListProductModule { }

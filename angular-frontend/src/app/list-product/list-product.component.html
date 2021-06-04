@@ -1,3 +1,30 @@
+<div class="container">
+  <form [formGroup]="searchForm">
+    <div class="row">
+      <div class="form-group col-2" >
+        <label for="InputName">Name</label>
+        <input type="text" class="form-control" id="InputName"
+               placeholder="Enter the product name" formControlName="nameSearch"
+        >
+      </div>
+      <div class="form-group col-4">
+        <label for="InputMarkets">Markets</label>
+        <input type="text" class="form-control" id="InputMarkets"
+               placeholder="Enter the target markets" formControlName="targetMarketsSearch"
+        >
+      </div>
+      <div class="form-group col-4">
+        <label for="InputTechnologies">Technologies</label>
+        <input type="text" class="form-control" id="InputTechnologies"
+               placeholder="Enter the technologies used" formControlName="technologiesSearch"
+        >
+      </div>
+      <div class="form-group col-2 align-self-xl-end" >
+        <button class="btn btn-dark">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
 <table class="table">
   <thead>
   <tr>
@@ -11,10 +38,10 @@
   <tbody>
   <tr *ngFor="let product of productList; index as i">
     <th scope="row">{{i}}</th>
-    <td>{{product.name}}</td>
+    <td>{{product.productName}}</td>
     <td>{{product.description}}</td>
-    <td>{{product.targetMarket.values()}}</td>
-    <td>{{product.technologies.values()}}</td>
+    <td>{{product.targetMarketStack.toString()}}</td>
+    <td>{{product.technologiesStack.toString()}}</td>
   </tr>
   </tbody>
 </table>

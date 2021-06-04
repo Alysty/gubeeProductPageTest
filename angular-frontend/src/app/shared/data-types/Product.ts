@@ -1,19 +1,18 @@
 export class Product{
   private _id: string;
-  private _name: string;
+  private _productName: string;
   private _description: string;
-  private _targetMarket: string[];
-  private _technologies: string[];
+  private _targetMarketStack: string[];
+  private _technologiesStack: string[];
 
 
-  constructor(id: string, name: string, description: string, targetMarket: string[], technologies: string[]) {
+  constructor(id: string, productName: string, description: string, targetMarketStack: string[], technologiesStack: string[]) {
     this._id = id;
-    this._name = name;
+    this._productName = productName;
     this._description = description;
-    this._targetMarket = targetMarket;
-    this._technologies = technologies;
+    this._targetMarketStack = targetMarketStack;
+    this._technologiesStack = technologiesStack;
   }
-
   get id(): string {
     return this._id;
   }
@@ -22,12 +21,12 @@ export class Product{
     this._id = value;
   }
 
-  get name(): string {
-    return this._name;
+  get productName(): string {
+    return this._productName;
   }
 
-  set name(value: string) {
-    this._name = value;
+  set productName(value: string) {
+    this._productName = value;
   }
 
   get description(): string {
@@ -38,19 +37,19 @@ export class Product{
     this._description = value;
   }
 
-  get targetMarket(): string[] {
-    return this._targetMarket;
+  get targetMarketStack(): string[] {
+    return this._targetMarketStack;
   }
 
-  set targetMarket(value: string[]) {
-    this._targetMarket = value;
+  set targetMarketStack(value: string[]) {
+    this._targetMarketStack = value;
   }
 
-  get technologies(): string[] {
-    return this._technologies;
+  get technologiesStack(): string[] {
+    return this._technologiesStack;
   }
 
-  set technologies(value: string[]) {
-    this._technologies = value;
+  set technologiesStack(value: string[]) {
+    this._technologiesStack = value;
   }
 }
