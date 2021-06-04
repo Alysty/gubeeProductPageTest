@@ -2,6 +2,7 @@ package com.spring_boot_backend.product.adapter.in.web;
 
 import com.spring_boot_backend.product.application.ports.out.UpdateProductUseCase;
 import com.spring_boot_backend.product.domain.Product;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +23,13 @@ public class ProductPutController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestBody Product product){
-        updateProductUseCase.updateProduct(UpdateProductUseCase.UpdateProductRequest.builder()
+        return new ResponseEntity(updateProductUseCase.updateProduct(UpdateProductUseCase.UpdateProductRequest.builder()
                 .id(product.getId())
                 .productName(product.getProductName())
                 .description(product.getDescription())
                 .targetMarketStack(product.getTargetMarketStack())
                 .technologiesStack(product.getTechnologiesStack())
                 .build()
-        );
-        return ResponseEntity.ok().build();
+        ), HttpStatus.OK);
     }
 }
