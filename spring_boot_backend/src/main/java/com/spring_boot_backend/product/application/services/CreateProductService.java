@@ -15,11 +15,11 @@ public class CreateProductService implements CreateProductUseCase {
 
 
     @Override
-    public void createProduct(CreateProductRequest createProductRequest) {
+    public Product createProduct(CreateProductRequest createProductRequest) {
         Product product = new Product(createProductRequest.getProductName(),
                 createProductRequest.getDescription(),
                 createProductRequest.getTargetMarketStack(),
                 createProductRequest.getTechnologiesStack());
-        this.productRepository.save(product);
+        return this.productRepository.save(product);
     }
 }
