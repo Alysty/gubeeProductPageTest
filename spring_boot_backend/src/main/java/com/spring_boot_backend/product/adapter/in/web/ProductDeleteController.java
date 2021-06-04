@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/products")
 public class ProductDeleteController {

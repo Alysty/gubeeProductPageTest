@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/products")
 public class ProductGetController {
@@ -31,7 +32,6 @@ public class ProductGetController {
                 .targetMarketStack(markets)
                 .technologiesStack(technologies)
                 .build());
-        System.out.println(productList.toArray().length);
         ResponseEntity<List<Product>> response = ResponseEntity.notFound().build();
         if (!productList.isEmpty()) {
             response = ResponseEntity.ok().body(productList);
