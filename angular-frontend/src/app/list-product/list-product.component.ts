@@ -40,18 +40,31 @@ export class ListProductComponent implements OnInit {
   public getProducts(){
     this.productService.getProducts(this.nameSearch, this.targetMarketsSearch, this.technologiesSearch)
       .subscribe(
-        (response) => {                           //next() callback
+        (response) => {
           console.log('response received')
           this.productList = response;
         },
-        (error) => {                              //error() callback
+        (error) => {
           console.error('Request failed with error')
           this.errorMessage = error;
           this.loading = false;
         },
-        () => {                                   //complete() callback
+        () => {
           this.loading = false;
         })
   }
-
+  public deleteProduct(id:string){
+    this.productService.deleteProduct(id)
+      .subscribe(
+        (response)=>{
+          console.log(response);
+          this.getProducts();
+        },
+        (error) => {
+          console.error('Request failed with error')
+          this.errorMessage = error;
+          this.loading = false;
+        }
+      )
+  }
 }

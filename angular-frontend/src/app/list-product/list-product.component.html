@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding-left: 20px">
   <form [formGroup]="searchForm">
     <div class="row">
       <div class="form-group col-2" >
@@ -33,6 +33,8 @@
     <th scope="col">Description</th>
     <th scope="col">Target Markets</th>
     <th scope="col">Technologies</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
@@ -42,6 +44,8 @@
     <td>{{product.description}}</td>
     <td>{{product.targetMarketStack.toString()}}</td>
     <td>{{product.technologiesStack.toString()}}</td>
+    <td><button class="btn btn-primary">EDIT</button></td>
+    <td><button class="btn btn-danger"(click)="deleteProduct(product.id)">DELETE</button></td>
   </tr>
   </tbody>
 </table>

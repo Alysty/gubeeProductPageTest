@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Product} from "../shared/data-types/Product";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +24,10 @@ export class ListProductService {
         params:httpParams
     });
 
+  }
+  deleteProduct(id:string):Observable<any> {
+    let httpParams = new HttpParams()
+      .set('id', id);
+    return this.http.delete(this.ROOT_URL, {params:httpParams});
   }
 }
