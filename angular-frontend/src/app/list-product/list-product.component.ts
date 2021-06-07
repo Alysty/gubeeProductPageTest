@@ -38,17 +38,17 @@ export class ListProductComponent implements OnInit {
 
 
   public setProductSearch(){
-    if(!( this.searchForm.get('nameSearch')?.value == null) ){
+    if( this.searchForm.get('nameSearch')?.value != null) {
       this.nameSearch = this.searchForm.get('nameSearch')?.value;
     }else{
       this.nameSearch = "";
     }
-    if (!(this.searchForm.get('targetMarketsSearch')?.value == null) && !(this.searchForm.get('targetMarketsSearch')?.value == '')){
+    if (this.searchForm.get('targetMarketsSearch')?.value != null && this.searchForm.get('targetMarketsSearch')?.value != ''){
       this.targetMarketsSearch = this.searchForm.get('targetMarketsSearch')?.value.split(',');
     }else{
       this.targetMarketsSearch = [];
     }
-    if (!(this.searchForm.get('technologiesSearch')?.value == null) && !(this.searchForm.get('technologiesSearch')?.value == '')) {
+    if (this.searchForm.get('technologiesSearch')?.value != null && this.searchForm.get('technologiesSearch')?.value != '') {
       this.technologiesSearch = this.searchForm.get('technologiesSearch')?.value.split(',');
     }else{
       this.targetMarketsSearch = [];
@@ -67,6 +67,7 @@ export class ListProductComponent implements OnInit {
         (error) => {
           console.error('Request failed with error')
           this.errorMessage = error;
+          this.productList = [];
           this.loading = false;
         },
         () => {
