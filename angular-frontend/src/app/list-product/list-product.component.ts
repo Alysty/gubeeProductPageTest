@@ -45,13 +45,9 @@ export class ListProductComponent implements OnInit {
     }
     if (this.searchForm.get('targetMarketsSearch')?.value != null){
       this.targetMarketsSearch = this.searchForm.get('targetMarketsSearch')?.value.split(',');
-    }else{
-      this.targetMarketsSearch = [];
     }
     if (this.searchForm.get('technologiesSearch')?.value != null) {
       this.technologiesSearch = this.searchForm.get('technologiesSearch')?.value.split(',');
-    }else{
-      this.targetMarketsSearch = [];
     }
 
   }
