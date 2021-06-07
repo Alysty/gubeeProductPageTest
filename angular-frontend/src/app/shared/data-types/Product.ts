@@ -55,4 +55,9 @@ export class Product{
   set technologiesStack(value: string[]) {
     this._technologiesStack = value;
   }
+  public static createProductObject(id: string | undefined, productName: string, description: string, targetMarketStack: string, technologiesStack: string) : Product{
+    let targetMarketStackTemp = targetMarketStack.split(',');
+    let technologiesStackTemp = technologiesStack.split(',');
+    return new Product(id, productName, description, targetMarketStackTemp, technologiesStackTemp);
+  }
 }
