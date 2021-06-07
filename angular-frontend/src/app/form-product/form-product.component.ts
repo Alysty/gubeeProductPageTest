@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormProductService} from "./form-product.service";
 import {Product} from "../shared/data-types/Product";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-form-product',
@@ -21,7 +21,8 @@ export class FormProductComponent implements OnInit {
   });
   constructor(private formService: FormProductService,
               private formBuilder:FormBuilder,
-              private activatedRoute:ActivatedRoute) { }
+              private activatedRoute:ActivatedRoute,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -44,6 +45,7 @@ export class FormProductComponent implements OnInit {
     }else{
       this.updateProduct();
     }
+    this.router.navigate(['/']).catch()
   }
   createProduct(){
     if(this.createForm.dirty && this.createForm.valid){

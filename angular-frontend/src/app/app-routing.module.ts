@@ -7,7 +7,7 @@ const routes: Routes = [
   },
   {path: 'formProduct',
     loadChildren: () => import('./form-product/form-product.module').then(m=>m.FormProductModule)},
-  {path: '', pathMatch: 'full', redirectTo: 'formProduct'}
+  {path: '', pathMatch: 'full', redirectTo: 'listProducts'}
 ];
 
 @NgModule({
