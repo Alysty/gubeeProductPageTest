@@ -12,9 +12,9 @@ export class ListProductComponent implements OnInit {
 
 
   searchForm: FormGroup = this.formBuilder.group({
-    nameSearch:[null],
-    targetMarketsSearch:[null],
-    technologiesSearch:[null]
+    nameSearch:[''],
+    targetMarketsSearch:[''],
+    technologiesSearch:['']
   });
 
   loading: boolean = false;
@@ -43,12 +43,12 @@ export class ListProductComponent implements OnInit {
     }else{
       this.nameSearch = "";
     }
-    if (this.searchForm.get('targetMarketsSearch')?.value != null && this.searchForm.get('targetMarketsSearch')?.value != ''){
+    if (this.searchForm.get('targetMarketsSearch')?.value != null){
       this.targetMarketsSearch = this.searchForm.get('targetMarketsSearch')?.value.split(',');
     }else{
       this.targetMarketsSearch = [];
     }
-    if (this.searchForm.get('technologiesSearch')?.value != null && this.searchForm.get('technologiesSearch')?.value != '') {
+    if (this.searchForm.get('technologiesSearch')?.value != null) {
       this.technologiesSearch = this.searchForm.get('technologiesSearch')?.value.split(',');
     }else{
       this.targetMarketsSearch = [];
@@ -61,7 +61,6 @@ export class ListProductComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('response received')
-          console.log(response)
           this.productList = response;
         },
         (error) => {
@@ -78,7 +77,6 @@ export class ListProductComponent implements OnInit {
     this.productService.deleteProduct(id)
       .subscribe(
         (response)=>{
-          console.log(response);
           this.getProducts();
         },
         (error) => {
