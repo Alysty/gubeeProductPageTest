@@ -4,7 +4,15 @@
       <div class="form-group col-3" >
         <label for="InputName">Name</label>
         <input type="text" class="form-control" id="InputName"
-               placeholder="Enter the product name" formControlName="nameSearch"
+               placeholder="Enter the product name" formControlName="name"
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-5" >
+        <label for="InputDescription">Description</label>
+        <input type="text" class="form-control" id="InputDescription"
+               placeholder="Enter the product's description" formControlName="description"
         >
       </div>
     </div>
@@ -12,7 +20,7 @@
       <div class="form-group col-5">
         <label for="InputMarkets">Markets</label>
         <input type="text" class="form-control" id="InputMarkets"
-               placeholder="Enter the target markets divided by a ," formControlName="targetMarketsSearch"
+               placeholder="Enter the target markets divided by a ," formControlName="targetMarkets"
         >
       </div>
     </div>
@@ -20,13 +28,13 @@
       <div class="form-group col-5">
         <label for="InputTechnologies">Technologies</label>
         <input type="text" class="form-control" id="InputTechnologies"
-               placeholder="Enter the technologies used divided by a ," formControlName="technologiesSearch"
+               placeholder="Enter the technologies used divided by a ," formControlName="technologies"
         >
       </div>
     </div>
     <div class="row">
       <div class="col-4"></div>
-      <button class="btn btn-dark">Create Product</button>
+      <button class="btn btn-dark" (click)="save()">Save Product</button>
     </div>
   </form>
 </div>
