@@ -44,7 +44,7 @@
     <td>{{product.description}}</td>
     <td>{{product.targetMarketStack.toString()}}</td>
     <td>{{product.technologiesStack.toString()}}</td>
-    <td><button class="btn btn-primary">EDIT</button></td>
+    <td><button class="btn btn-primary" [routerLink]="['/formProduct', {product: editProduct(product)}]">EDIT</button></td>
     <td><button class="btn btn-danger"(click)="deleteProduct(product.id)">DELETE</button></td>
   </tr>
   </tbody>

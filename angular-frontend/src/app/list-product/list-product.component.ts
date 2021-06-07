@@ -56,7 +56,6 @@ export class ListProductComponent implements OnInit {
     this.productService.getProducts(this.nameSearch, this.targetMarketsSearch, this.technologiesSearch)
       .subscribe(
         (response) => {
-          console.log('response received')
           this.productList = response;
         },
         (error) => {
@@ -68,6 +67,9 @@ export class ListProductComponent implements OnInit {
         () => {
           this.loading = false;
         })
+  }
+  public editProduct(product: Product){
+    return JSON.stringify(product);
   }
   public deleteProduct(id:string | undefined){
     this.productService.deleteProduct(id)

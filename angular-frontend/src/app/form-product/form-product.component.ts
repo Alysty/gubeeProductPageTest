@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormProductService} from "./form-product.service";
 import {Product} from "../shared/data-types/Product";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-form-product',
@@ -10,7 +11,7 @@ import {Product} from "../shared/data-types/Product";
 })
 export class FormProductComponent implements OnInit {
 
-  @Input() product: Product | undefined = undefined;
+  @Input() product: Product | undefined;
 
   createForm: FormGroup = this.formBuilder.group({
     name:[null, Validators.required],
@@ -18,14 +19,22 @@ export class FormProductComponent implements OnInit {
     targetMarkets:[null, Validators.required],
     technologies:[null, Validators.required]
   });
-  constructor(private formService: FormProductService, private formBuilder:FormBuilder) { }
+  constructor(private formService: FormProductService,
+              private formBuilder:FormBuilder,
+              private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      if(params.get('product') != null){
+        this.product = JSON.parse((<string>params.get('product')).toString());
+      }
+    });
     if(this.product != undefined){
-      this.createForm.setValue({"name": this.product.productName});
-      this.createForm.setValue({"description": this.product.description});
-      this.createForm.setValue({"targetMarkets": this.product.targetMarketStack});
-      this.createForm.setValue({"technologies": this.product.technologiesStack});
+      this.createForm.setValue({
+        "name": this.product.productName,
+        "description": this.product.description,
+        "targetMarkets": this.product.targetMarketStack,
+        "technologies": this.product.technologiesStack});
     }
   }
 
@@ -47,8 +56,6 @@ export class FormProductComponent implements OnInit {
       this.formService.create(product).subscribe(
 
         (response) => {
-          console.log('response received')
-          console.log(response)
         },
         (error) => {
           alert(error);
@@ -66,7 +73,15 @@ export class FormProductComponent implements OnInit {
         this.createForm.get('description')?.value,
         this.createForm.get('targetMarkets')?.value,
         this.createForm.get('technologies')?.value)
-      this.formService.update(product);
+      this.formService.update(product).subscribe(
+        (response) => {
+        },
+        (error) => {
+          alert(error);
+          console.error('Request failed with error')
+        },
+        () => {
+        });
     }
   }
 
