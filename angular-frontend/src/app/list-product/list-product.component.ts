@@ -73,7 +73,7 @@ export class ListProductComponent implements OnInit {
           this.loading = false;
         })
   }
-  public deleteProduct(id:string){
+  public deleteProduct(id:string | undefined){
     this.productService.deleteProduct(id)
       .subscribe(
         (response)=>{
