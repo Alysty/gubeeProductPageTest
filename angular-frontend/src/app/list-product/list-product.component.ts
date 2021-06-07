@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../shared/data-types/Product";
 import {ListProductService} from "./list-product.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-list-product',
@@ -10,8 +10,12 @@ import {FormBuilder} from "@angular/forms";
 })
 export class ListProductComponent implements OnInit {
 
-  // @ts-ignore
-  searchForm: FormGroup;
+
+  searchForm: FormGroup = this.formBuilder.group({
+    nameSearch:[null],
+    targetMarketsSearch:[null],
+    technologiesSearch:[null]
+  });
 
   loading: boolean = false;
 
@@ -29,19 +33,35 @@ export class ListProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.searchForm = this.formBuilder.group({
-      nameSearch:[null],
-      targetMarketsSearch:[null],
-      technologiesSearch:[null]
-    });
     this.getProducts();
   }
 
+
+  public setProductSearch(){
+    if(!( this.searchForm.get('nameSearch')?.value == null) ){
+      this.nameSearch = this.searchForm.get('nameSearch')?.value;
+    }else{
+      this.nameSearch = "";
+    }
+    if (!(this.searchForm.get('targetMarketsSearch')?.value == null) && !(this.searchForm.get('targetMarketsSearch')?.value == '')){
+      this.targetMarketsSearch = this.searchForm.get('targetMarketsSearch')?.value.split(',');
+    }else{
+      this.targetMarketsSearch = [];
+    }
+    if (!(this.searchForm.get('technologiesSearch')?.value == null) && !(this.searchForm.get('technologiesSearch')?.value == '')) {
+      this.technologiesSearch = this.searchForm.get('technologiesSearch')?.value.split(',');
+    }else{
+      this.targetMarketsSearch = [];
+    }
+
+  }
   public getProducts(){
+    this.setProductSearch();
     this.productService.getProducts(this.nameSearch, this.targetMarketsSearch, this.technologiesSearch)
       .subscribe(
         (response) => {
           console.log('response received')
+          console.log(response)
           this.productList = response;
         },
         (error) => {
