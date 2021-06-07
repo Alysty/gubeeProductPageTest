@@ -1,23 +1,26 @@
+import {Optional} from "@angular/core";
+
 export class Product{
-  private _id: string;
+
+  private _id?: string;
   private _productName: string;
   private _description: string;
   private _targetMarketStack: string[];
   private _technologiesStack: string[];
 
 
-  constructor(id: string, productName: string, description: string, targetMarketStack: string[], technologiesStack: string[]) {
+  constructor( id: string | undefined, productName: string, description: string, targetMarketStack: string[], technologiesStack: string[]) {
     this._id = id;
     this._productName = productName;
     this._description = description;
     this._targetMarketStack = targetMarketStack;
     this._technologiesStack = technologiesStack;
   }
-  get id(): string {
+  get id(): string | undefined {
     return this._id;
   }
 
-  set id(value: string) {
+  set id(value: string | undefined) {
     this._id = value;
   }
 
