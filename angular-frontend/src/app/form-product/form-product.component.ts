@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormProductService} from "./form-product.service";
 
 @Component({
   selector: 'app-form-product',
@@ -9,13 +10,17 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class FormProductComponent implements OnInit {
 
   createForm: FormGroup = this.formBuilder.group({
-    nameSearch:[null],
-    targetMarketsSearch:[null],
-    technologiesSearch:[null]
+    nameSearch:[null, Validators.required],
+    targetMarketsSearch:[null, Validators.required],
+    technologiesSearch:[null, Validators.required]
   });
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formService: FormProductService, private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
   }
-
+  createProduct(){
+    if(this.createForm.dirty && this.createForm.valid){
+      this.formService.save();
+    }
+  }
 }
