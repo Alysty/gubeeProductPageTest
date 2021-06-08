@@ -57,7 +57,7 @@ export class FormProductComponent implements OnInit {
   validationErrors(field: string){
     return{
       'is-invalid': this.verifyValidAndTouched(field),
-      'has-feedback': !this.verifyValidAndTouched(field),
+      'has-feedback': this.verifyValidAndTouched(field),
       'has-danger-custom': this.verifyValidAndTouched(field)
     }
   }
