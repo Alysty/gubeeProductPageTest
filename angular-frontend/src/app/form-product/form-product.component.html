@@ -14,6 +14,7 @@
         <label for="InputDescription">Description</label>
         <input type="text" class="form-control" id="InputDescription"
                placeholder="Enter the product's description" formControlName="description"
+               [ngClass]="validationErrors('description')"
         >
       </div>
     </div>
@@ -22,6 +23,7 @@
         <label for="InputMarkets">Markets</label>
         <input type="text" class="form-control" id="InputMarkets"
                placeholder="Enter the target markets divided by a ," formControlName="targetMarkets"
+               [ngClass]="validationErrors('targetMarkets')"
         >
       </div>
     </div>
@@ -30,6 +32,7 @@
         <label for="InputTechnologies">Technologies</label>
         <input type="text" class="form-control" id="InputTechnologies"
                placeholder="Enter the technologies used divided by a ," formControlName="technologies"
+               [ngClass]="validationErrors('technologies')"
         >
       </div>
     </div>
