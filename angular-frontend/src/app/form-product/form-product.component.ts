@@ -14,10 +14,10 @@ export class FormProductComponent implements OnInit {
   @Input() product: Product | undefined;
 
   createForm: FormGroup = this.formBuilder.group({
-    name:[null, Validators.required],
-    description:[null, Validators.required],
-    targetMarkets:[null, Validators.required],
-    technologies:[null, Validators.required]
+    name:[null, [Validators.required, Validators.minLength(3)]],
+    description:[null, [Validators.required, Validators.minLength(5)]],
+    targetMarkets:[null,  [Validators.required, Validators.minLength(3)]],
+    technologies:[null, [Validators.required, Validators.minLength(3)]]
   });
   constructor(private formService: FormProductService,
               private formBuilder:FormBuilder,
@@ -40,12 +40,26 @@ export class FormProductComponent implements OnInit {
   }
 
   save(){
-    if(this.product == undefined){
-      this.createProduct();
+    if(this.createForm.valid){
+      if(this.product == undefined){
+        this.createProduct();
+      }else{
+        this.updateProduct();
+      }
+      this.router.navigate(['/']).catch()
     }else{
-      this.updateProduct();
+      alert("Invalid product")
     }
-    this.router.navigate(['/']).catch()
+  }
+  verifyValidAndTouched(field: string){
+    return !this.createForm.get(field)?.valid && this.createForm.get(field)?.touched
+  }
+  validationErrors(field: string){
+    return{
+      'is-invalid': this.verifyValidAndTouched(field),
+      'has-feedback': !this.verifyValidAndTouched(field),
+      'has-danger-custom': this.verifyValidAndTouched(field)
+    }
   }
   createProduct(){
     if(this.createForm.dirty && this.createForm.valid){

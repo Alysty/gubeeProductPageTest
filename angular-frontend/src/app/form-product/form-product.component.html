@@ -1,10 +1,11 @@
 <div class="container-fluid" style="padding-left: 50px">
-  <form [formGroup]="createForm">
-    <div class="row">
+  <form [formGroup]="createForm" >
+    <div class="row"  >
       <div class="form-group col-3" >
         <label for="InputName">Name</label>
         <input type="text" class="form-control" id="InputName"
                placeholder="Enter the product name" formControlName="name"
+               [ngClass]="validationErrors('name')"
         >
       </div>
     </div>
